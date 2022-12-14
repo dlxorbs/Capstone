@@ -1,0 +1,10 @@
+{
+    "model": "text-davinci-003",
+    "prompt": "help me이야기가 맞나요?\n\nNo, that is not a story.\n\n사자, 호랑이.\n\nOnce upon a time, there were two best friends, a lion and a tiger. They were always together, exploring the forests and plains of their kingdom. One day, the two adventurers found an amazing golden egg. The lion and the tiger were so excited to see what was inside the egg! Together, they cracked it open and out came a beautiful genie who granted them each three wishes. The lion and the tiger happily used up all their wishes and lived happily ever after.",
+    "temperature": 0.9,
+    "max_tokens": 150,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "presence_penalty": 0.6,
+    "stop": [" AI:"]
+  }
