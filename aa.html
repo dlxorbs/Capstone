@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .result{
+            width: 50%;
+            height: 400px;
+        }
+        .imgcon{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <input type="text" class="keyword">
+        <button id="send">입력</button>
+        <div class="result">
+        </div>
+
+
+        <div class="imgcon"></div>
+
+
+    </div>
+
+    <script type="module">
+
+        import { Configuration, OpenAIApi } from 'https://cdn.skypack.dev/openai';
+
+        document.querySelector('#send').addEventListener('click', function(){
+        
+            let keyword = document.querySelector('.keyword').value
+
+            const configuration = new Configuration({
+            apiKey: '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',
+            });
+            const openai = new OpenAIApi(configuration);
+
+   
+
+        openai.createCompletion({
+            model: "text-davinci-003",
+            prompt:  'Please make a fairy tale with the characters of ' + keyword ,
+            temperature: 0.9,
+            max_tokens: 2000,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0.6,
+            stop: [" AI:"],
+            }).then((result)=>{
+                var fariytale = document.querySelector('.result');
+                    fariytale.append(result.data.choices[0].text )
+                console.log(result.data.choices[0].text)
+            })
+        openai.createImage({
+                    prompt: "handdrawn" + keyword ,
+                    n: 4,
+                    size: "512x512",
+                }).then((results)=>{
+                    for(let i = 0; i < 4; i++){
+                        let img = $('<img src = '+ results.data.data[i].url +'>')
+                    $('.imgcon').append(img)
+                    }
+                    console.log(results)
+                })
+        })
+    </script>
+
+</body>
+</html>
